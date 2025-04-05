@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const axios = require("axios");
 
 exports.handler = async (event) => {
   const countryName = event.queryStringParameters.name;
@@ -11,17 +11,11 @@ exports.handler = async (event) => {
   }
 
   try {
-    const res = await fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`);
+    const response = await axios.get(
+      `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+    );
 
-    if (!res.ok) {
-      return {
-        statusCode: res.status,
-        body: JSON.stringify({ error: "Country not found" }),
-      };
-    }
-
-    const data = await res.json();
-    const country = data[0];
+    const country = response.data[0];
 
     return {
       statusCode: 200,
@@ -44,10 +38,10 @@ exports.handler = async (event) => {
       }),
     };
   } catch (error) {
-    console.error("Serverless function error:", error);
+    console.error("Serverless function error:", error.message);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Internal Server Error" }),
+      body: JSON.stringify({ error: "Failed to fetch country details" }),
     };
   }
 };
