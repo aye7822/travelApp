@@ -18,7 +18,7 @@ export const fetchCountries = async () => {
   }
 };
 
-import axios from "axios";
+
 
 export const fetchCountryDetails = async (countryName) => {
   try {
