@@ -12,10 +12,10 @@ exports.handler = async (event) => {
 
   try {
     const response = await axios.get(
-      `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+      `https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`
     );
 
-    const country = response.data[0];
+    const country = response.data?.[0];
 
     return {
       statusCode: 200,

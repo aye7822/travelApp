@@ -18,6 +18,8 @@ export const fetchCountries = async () => {
   }
 };
 
+import axios from "axios";
+
 export const fetchCountryDetails = async (countryName) => {
   try {
     const response = await axios.get(`/api/get-country?name=${countryName}`);
@@ -37,7 +39,7 @@ export const fetchCountryDetails = async (countryName) => {
       language: country.language || "Unknown",
     };
   } catch (error) {
-    console.error("Country Fetch Error:", error);
+    console.error("🌐 Country Fetch Error:", error);
     return null;
   }
 };
