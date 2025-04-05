@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"
+  publish = "build"
+
+[[redirects]]
+  from = "/api/get-country"
+  to = "/.netlify/functions/get-country"
+  status = 200

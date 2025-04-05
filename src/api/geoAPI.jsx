@@ -23,11 +23,10 @@ export const fetchCountries = async () => {
 
 export const fetchCountryDetails = async (countryName) => {
   try {
-    const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`);
+    const response = await fetch(`/api/get-country?name=${countryName}`);
     if (!response.ok) throw new Error(`Country API error: ${response.statusText}`);
 
-    const data = await response.json();
-    const country = data[0];
+    const country = await response.json();
 
     return {
       name: country.name?.common || "Unknown", 
